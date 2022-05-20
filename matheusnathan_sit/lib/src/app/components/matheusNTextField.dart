@@ -22,6 +22,7 @@ class StandardTextField extends StatelessWidget {
       decoration: InputDecoration(
         label: Text(label),
         border: OutlineInputBorder(),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 10),
       ),
     );
   }

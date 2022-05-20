@@ -11,7 +11,16 @@ class StandardListCard extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: Colors.blue, width: 2),
+        border: Border.all(color: Colors.deepPurpleAccent, width: 2),
+        color: Colors.deepPurple,
+        boxShadow: const [
+                BoxShadow(
+                  color: Colors.deepPurple,
+                  blurRadius: 5,
+                  spreadRadius: 1,
+                  offset: Offset(4, 4)
+                ),
+              ],
       ),
       height: 60,
       padding: const EdgeInsets.symmetric(horizontal: 5),

@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:matheusnathan_sit/src/app/components/matheusNButton.dart';
 import 'package:matheusnathan_sit/src/app/components/matheusNListCard.dart';
+import 'package:matheusnathan_sit/src/app/components/matheusNPage.dart';
 import 'package:matheusnathan_sit/src/app/components/matheusNTextField.dart';
 import 'package:matheusnathan_sit/src/app/models/movieList_model.dart';
+import 'package:matheusnathan_sit/ui_text.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -34,57 +36,64 @@ class _MovieListState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("ListaFilme"),
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            StandardTextField(
-              focusNode: movieNameFocus,
-              userInputController: movieNameController,
-              label: "Movie Name",
-              onEditingComplete: () {
-                ratingFocus.nextFocus();
-              },
-            ),
-            StandardTextField(
-              focusNode: ratingFocus,
-              userInputController: ratingController,
-              label: "Rating",
-            ),
-            StandardButton(
-              onPressed: () {
-                addMovie(
-                    movieName: movieNameController.text,
-                    rating: ratingController.text);
-              },
-            ),
-            ListView.separated(
-              shrinkWrap: true,
-              itemBuilder: ((context, index) {
-                var listItem = movieList[index];
-                return MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  child: GestureDetector(
-                    onTap: () {
-                      print(listItem.movieName);
-                    },
+      body: StandardPage(
+        title: title,
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 35,
+              ),
+              StandardTextField(
+                focusNode: movieNameFocus,
+                userInputController: movieNameController,
+                label: movieName,
+                onEditingComplete: () {
+                  ratingFocus.nextFocus();
+                },
+              ),
+              const SizedBox(
+                height: 25,
+              ),
+              StandardTextField(
+                focusNode: ratingFocus,
+                userInputController: ratingController,
+                label: rating,
+              ),
+              const SizedBox(
+                height: 10,
+              ),
+              StandardButton(
+                onPressed: () {
+                  addMovie(
+                      movieName: movieNameController.text,
+                      rating: ratingController.text);
+                },
+              ),
+              const SizedBox(
+                height: 35,
+              ),
+              ListView.separated(
+                shrinkWrap: true,
+                itemBuilder: ((context, index) {
+                  var listItem = movieList[index];
+                  return MouseRegion(
+                    cursor: SystemMouseCursors.click,
                     child: StandardListCard(
                       movieName: listItem.movieName,
-                      rating: '${listItem.rating} \ /5',
+                      rating: '${listItem.rating} \ /  5 ',
                     ),
-                  ),
-                );
-              }),
-              separatorBuilder: (BuildContext context, int index) {
-                return const SizedBox(
-                  height: 15,
-                );
-              },
-              itemCount: movieList.length,
-            )
-          ],
+                  );
+                }),
+                separatorBuilder: (BuildContext context, int index) {
+                  return const SizedBox(
+                    height: 15,
+                  );
+                },
+                itemCount: movieList.length,
+              ),
+            ],
+          ),
         ),
       ),
     );
